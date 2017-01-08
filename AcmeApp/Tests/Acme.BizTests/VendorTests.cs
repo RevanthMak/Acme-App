@@ -23,6 +23,7 @@ namespace Acme.Biz.Tests
             var actual = vendor.SendWelcomeEmail("Test Message");
 
             // Assert
+            //This is the basic commit
             Assert.AreEqual(expected, actual);
         }
 
