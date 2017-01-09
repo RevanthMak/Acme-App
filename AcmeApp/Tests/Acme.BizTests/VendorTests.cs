@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Acme.Common;
 
 namespace Acme.Biz.Tests
 {
@@ -17,7 +18,7 @@ namespace Acme.Biz.Tests
             // Arrange
             var vendor = new Vendor();
             vendor.CompanyName = "ABC Corp";
-            var expected = "Message sent: Hello ABC Corp";
+            var expected = "Message sent: HelloABC Corp";
 
             // Act
             var actual = vendor.SendWelcomeEmail("Test Message");
@@ -55,6 +56,54 @@ namespace Acme.Biz.Tests
 
             // Assert
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void PlaceOrderTest()
+        {
+            //Arrange 
+            var vendor = new Vendor();
+            var product = new Product(1, "Knife", "Placing an order");
+            var expected = new OperationResult(true, "Order from Acme, INC\r\nProduct:Tools-1\r\nQuantity:12");
+
+            //Act
+            var actual = vendor.PlaceOrder(product, 12);
+
+            //Assert
+            Assert.AreEqual(expected.Success, actual.Success);
+            Assert.AreEqual(expected.Message, actual.Message);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PlaceOrder_NullProduct_Exception()
+        {
+            //Arrange
+            var vendor = new Vendor();
+
+            //Act
+            var expected = vendor.PlaceOrder(null, 12);
+
+            //Assert
+            //Expected Exception
+
+        }
+
+        [TestMethod()]
+        public void PlaceOrderTest1()
+        {
+            //Arrange
+            var currentOrder = new Vendor();
+            var product = new Product(1, "Knife", "");
+            var expected = new OperationResult(true, "Order from Acme, INC\r\nProduct:Tools-1\r\nQuantity:12" 
+                + "\r\nDeliver by: 10/25/2015");
+
+            //Act
+            var actual = currentOrder.PlaceOrder(product, 12,new DateTimeOffset(2015,10,25,0,0,0, new TimeSpan(-7,0,0)));
+
+            //Assert
+            Assert.AreEqual(expected.Success, actual.Success);
+            Assert.AreEqual(expected.Message, actual.Message);
         }
     }
 }
