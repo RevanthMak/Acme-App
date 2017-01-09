@@ -119,7 +119,12 @@ namespace Acme.Biz
             var result = LoggingService.LogAction("Saying Hello");
 
             return "Hello" + productName + "(" + productId + ")" + description + AccessibilityDate?.ToShortDateString();
-        } 
+        }
+
+        public override string ToString()
+        {
+            return this.productName + "(" + this.productId + ")";
+        }
 
 
     }
