@@ -61,12 +61,13 @@ namespace Acme.Biz.Tests
             var vendor = new Vendor();
             var product = new Product(1, "Knife", "Placing an order");
             var produc = new Product(ProductId: 2, ProductName: "Knnn", Description: "XYZ");
-            var expected = new OperationResult(true, "Order from Acme, INC\r\nProduct:Tools-1\r\nQuantity:12");
+            var expected = new OperationResult(true, "Order from Acme, INC\r\nProduct:Tools-1\r\nQuantity:12" +
+                "\r\nInstruction: Standard delivery");
 
             //Act
             var actual = vendor.PlaceOrder(product, 12);
 
-            //Assert
+            //Assert 
             Assert.AreEqual(expected.Success, actual.Success);
             Assert.AreEqual(expected.Message, actual.Message);
         }
