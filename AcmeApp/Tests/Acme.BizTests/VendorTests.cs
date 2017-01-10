@@ -1,4 +1,5 @@
-﻿using Acme.Common;
+﻿using Acme.Biz;
+using Acme.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -91,15 +92,32 @@ namespace Acme.Biz.Tests
             //Arrange
             var currentOrder = new Vendor();
             var product = new Product(1, "Knife", "");
-            var expected = new OperationResult(true, "Order from Acme, INC\r\nProduct:Tools-1\r\nQuantity:12" 
-                + "\r\nDeliver by:10/25/2015" );
+            var expected = new OperationResult(true, "Order from Acme, INC\r\nProduct:Tools-1\r\nQuantity:12"
+                + "\r\nDeliver by:10/25/2015");
 
             //Act
-            var actual = currentOrder.PlaceOrder(product, 12,new DateTimeOffset(2015,10,25,0,0,0, new TimeSpan(-7,0,0)));
+            var actual = currentOrder.PlaceOrder(product, 12, new DateTimeOffset(2015, 10, 25, 0, 0, 0, new TimeSpan(-7, 0, 0)));
 
             //Assert
             Assert.AreEqual(expected.Success, actual.Success);
             Assert.AreEqual(expected.Message, actual.Message);
+        }
+
+        [TestMethod()]
+        public void PlaceOrderTest_WithEnums()
+        {
+            //Arrange 
+            var vendor = new Vendor();
+            var product = new Product(1, "saw", "");
+            var expected = new OperationResult(true, "Test With Address With Copy");
+
+            //Act
+            var actual = vendor.PlaceOrder(product, 12, Vendor.IncludeAddress.yes, Vendor.SendCopy.No);
+
+            //Assert
+
+            Assert.AreEqual(expected.Message, actual.Message);
+            Assert.AreEqual(expected.Success, actual.Success);
         }
     }
 }

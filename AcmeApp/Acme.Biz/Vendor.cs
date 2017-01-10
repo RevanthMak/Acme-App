@@ -12,6 +12,10 @@ namespace Acme.Biz
     /// </summary>
     public class Vendor 
     {
+
+        public enum IncludeAddress { yes, no};
+        public enum SendCopy { yes, No};
+
         public int VendorId { get; set; }
         public string CompanyName { get; set; }
         public string Email { get; set; }
@@ -98,6 +102,17 @@ namespace Acme.Biz
                                                         message, 
                                                         this.Email);
             return confirmation;
+        }
+
+        public OperationResult PlaceOrder(Product product, int quantity, IncludeAddress includeaddress, SendCopy sendcopy)
+        {
+            var orderText = "Test";
+            if (includeaddress == IncludeAddress.yes) orderText += " With Address";
+            if (sendcopy == SendCopy.No ) orderText += " With Copy";
+
+            var operationResult = new OperationResult(true, orderText);
+            return operationResult;
+
         }
     }
 }
