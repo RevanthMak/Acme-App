@@ -114,10 +114,8 @@ namespace Acme.Biz
         /// </summary>
         /// <param name="markupPercent"></param>
         /// <returns></returns>
-        public decimal CalculateSuggestedPrice(decimal markupPercent)
-        {
-            return this.cost + (this.cost * markupPercent / 100);
-        }
+        public decimal CalculateSuggestedPrice(decimal markupPercent) => cost + (this.cost * markupPercent / 100);
+        
 
         public string SayHello()
         {
