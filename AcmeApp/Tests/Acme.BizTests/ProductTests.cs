@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Acme.Biz;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Acme.Biz.Tests
 {
@@ -29,14 +30,14 @@ namespace Acme.Biz.Tests
         {
             //Arrange
             var currentproduct = new Product(1, "Knife", "Used to cut something");
-            var expected = "HelloKnife(1)Used to cut something" + "Available on";
+            var expected = "HelloKnife(1)Used to cut something";//+ "Available on";
 
             //Act
             var actual = currentproduct.SayHello();
 
             //Assert
             Assert.AreEqual(expected, actual);
-        } 
+        }
 
         public void Product_Null()
         {
@@ -49,9 +50,9 @@ namespace Acme.Biz.Tests
             var actual = CompanyName;
 
             //Assert
-            Assert.AreEqual(expected, actual); 
+            Assert.AreEqual(expected, actual);
 
-             
+
         }
 
         [TestMethod()]
@@ -109,7 +110,7 @@ namespace Acme.Biz.Tests
             var actual = currentProduct.productName;
 
             //Assert
-            Assert.AreEqual(expected,actual);
+            Assert.AreEqual(expected, actual);
 
         }
 
@@ -169,7 +170,7 @@ namespace Acme.Biz.Tests
             var actualMessage = currentProduct.ValidationMessage;
 
             //Assert
-            Assert.AreEqual(expected,actual);
+            Assert.AreEqual(expected, actual);
             Assert.AreEqual(expectedMessage, actualMessage);
 
         }
@@ -185,8 +186,22 @@ namespace Acme.Biz.Tests
             var actual = currentProduct.ProductCode;
 
             //Assert
-            Assert.AreEqual(expected,actual);
+            Assert.AreEqual(expected, actual);
 
+        }
+
+        [TestMethod()]
+        public void CalculateSuggestedPriceTest()
+        {
+            //Arrange 
+            var currentProduct = new Product();
+            currentProduct.cost = 50m;
+            var expected = 55m;
+
+            //Act
+            var actual = currentProduct.CalculateSuggestedPrice(10m);
+            //Assert
+            Assert.AreEqual(expected,actual);
         }
     }
 }

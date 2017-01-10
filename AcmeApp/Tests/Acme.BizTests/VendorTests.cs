@@ -96,7 +96,7 @@ namespace Acme.Biz.Tests
             var currentOrder = new Vendor();
             var product = new Product(1, "Knife", "");
             var expected = new OperationResult(true, "Order from Acme, INC\r\nProduct:Tools-1\r\nQuantity:12" 
-                + "\r\nDeliver by: 10/25/2015");
+                + "\r\nDeliver by: 10/25/2015" + "\r\nInstruction: ");
 
             //Act
             var actual = currentOrder.PlaceOrder(product, 12,new DateTimeOffset(2015,10,25,0,0,0, new TimeSpan(-7,0,0)));

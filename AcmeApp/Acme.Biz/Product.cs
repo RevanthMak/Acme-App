@@ -105,8 +105,19 @@ namespace Acme.Biz
 
         public string ProductCode => this.Category + "-" + this.SequenceId;
 
+        public decimal cost { get; set; }
+
         #endregion
 
+        /// <summary>
+        /// Calculates the suggested prcie
+        /// </summary>
+        /// <param name="markupPercent"></param>
+        /// <returns></returns>
+        public decimal CalculateSuggestedPrice(decimal markupPercent)
+        {
+            return this.cost + (this.cost * markupPercent / 100);
+        }
 
         public string SayHello()
         {
