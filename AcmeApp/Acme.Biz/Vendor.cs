@@ -63,7 +63,7 @@ namespace Acme.Biz
 
             if (deliverBy.HasValue)
             {
-                OrderText += System.Environment.NewLine + "Deliver by: " + deliverBy.Value;
+                OrderText += System.Environment.NewLine + "Deliver by:" + deliverBy.Value.ToString("d");
 
             }
 
