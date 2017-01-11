@@ -103,7 +103,7 @@ namespace Acme.Biz
         public string Category { get; set; }
         public int SequenceId { get; set; } = 1;
 
-        public string ProductCode => this.Category + "-" + this.SequenceId;
+        public string ProductCode => $"{this.Category} - {this.SequenceId}";
 
         public decimal cost { get; set; }
 

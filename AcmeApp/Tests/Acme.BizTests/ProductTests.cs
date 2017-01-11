@@ -201,7 +201,23 @@ namespace Acme.Biz.Tests
             //Act
             var actual = currentProduct.CalculateSuggestedPrice(10m);
             //Assert
-            Assert.AreEqual(expected,actual);
+            Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod()]
+        public void ProductcodeTest()
+        {
+            //Arrange
+            var currentCode = new Product();
+            var expected = "Tools - 1";
+
+            //Act
+            var actual = currentCode.ProductCode;
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+
+        }
+
     }
 }
