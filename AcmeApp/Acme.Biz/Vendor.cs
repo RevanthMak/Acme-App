@@ -36,28 +36,28 @@ namespace Acme.Biz
             if (deliverBy <= DateTimeOffset.Now) throw new ArgumentOutOfRangeException(nameof(deliverBy));
 
             var success = false;
-            var OrderText = "Order from Acme, INC" + System.Environment.NewLine + "Product:" + product.ProductCode
-                + System.Environment.NewLine + "Quantity:" + quantity;
+            var OrderText = new StringBuilder("Order from Acme, INC" + System.Environment.NewLine + "Product:" + product.ProductCode
+                + System.Environment.NewLine + "Quantity:" + quantity);
 
             if (deliverBy.HasValue)
             {
-                OrderText += System.Environment.NewLine + "Deliver by:" + deliverBy.Value.ToString("d");
+                OrderText.Append(System.Environment.NewLine + "Deliver by:" + deliverBy.Value.ToString("d"));
 
             }
 
             if(!string.IsNullOrWhiteSpace(instructions))
             {
-                OrderText += System.Environment.NewLine + "Instruction: " + instructions;
+                OrderText.Append( System.Environment.NewLine + "Instruction: " + instructions);
 
             }
 
             var emailService = new EmailService();
-            var Confirmation = emailService.SendMessage("New Order", OrderText, Email);
+            var Confirmation = emailService.SendMessage("New Order", OrderText.ToString(), Email);
             if (Confirmation.StartsWith("Message sent: "))
             {
                 success = true;
             }
-            var opResult = new OperationResult(success, OrderText);
+            var opResult = new OperationResult(success, OrderText.ToString());
             return opResult;
 
 
